@@ -60,6 +60,14 @@ Instead of selecting an entry in **OS images** for **Boot disk**, select **Custo
 It should take about 5 minutes for the instance to get created. You should now be able to launch your instance with our custom image. The custom disk is 40GB and uses Ubuntu 16.04 LTS. 
 The default python version in the system is Python 2.7.2 and there is a virtual environment in **/home/cs231n/myVE35** with version 3.5.2. 
 
+**NOTE:** Some students have reported GPU instances whose drivers disappear upon restarts. And there is strong evidence to suggest that the issue happens when Ubuntu auto-installs security updates upon booting up. To disable auto-updating, run
+
+```
+sudo apt-get remove unattended-upgrades
+```
+
+after logging into your instance for the first time.
+
 ### Load the virtual environment ###
 You **don't need to create a new virtual environment** for this assignment -- we are providing you with one, with all the Python packages you need for the assignment already installed. So, unlike the previous assignment, you do not need to run any commands to create the virtual environment (and install packages, etc), just one command to activate it. To use this virtual environment, run the following command (you may have to do this every time you start your instance up, if you don't see your bash prompt prefaced by "(myVE35)"): 
 
@@ -94,6 +102,20 @@ unzip spring1617_assignment2.zip
 ```
 
 Get back to the Assignment 2 instructions [here](http://cs231n.github.io/assignments2017/assignment2/). Follow the instructions starting from the **Download data** section.
+
+**NOTE: Some students have seen errors saying that an NVIDIA driver is not installed.** If you see this error, follow the instructions [here](https://cloud.google.com/compute/docs/gpus/add-gpus#install-driver-script "title") to run the script for **Ubuntu 16.04 LTS or 16.10 - CUDA 8 with latest driver** under **Installing GPU drivers**. I.e. copy and paste the script into a file, lets call the file install_cuda.sh. And then run 
+
+```
+sudo bash install_cuda.sh 
+```
+
+Once you run the script above, run the commands 
+```
+nvidia-smi
+nvcc --version
+```
+
+to ensure that the drivers are installed.
 
 ## Transferring Files to Your Local Computer ##
 After following assignment 2 instructions to run the submission script and create assignment2.zip, you can download that file directly from Jupyter. To do this, go to Jupyter Notebook and click on the zip file (in this case assignment2.zip). The file will be downloaded to your local computer. You can also use the **gcloud compute copy-files** command to transfer files as discussed in the **Submission: Transferring Files From Your Instance To Your Computer** section in [the first GCE tutorial](http://cs231n.github.io/gce-tutorial/ "title").
